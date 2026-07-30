@@ -12,13 +12,22 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
       - name: Debug - List files
         run: |
+          echo "=== Current directory ==="
           pwd
+          echo "=== All files in root ==="
           ls -la
-          ls -la *.tex || echo "No .tex files found in root"
+          echo "=== Searching for .tex files ==="
           find . -name "*.tex" -type f
+          echo "=== Checking thesis.tex ==="
+          if [ -f "thesis.tex" ]; then
+            echo "thesis.tex EXISTS"
+            echo "First 10 lines:"
+            head -n 10 thesis.tex
+          else
+            echo "thesis.tex NOT FOUND in root"
+          fi
 
       - name: Compile with LaTeXML
         run: |
