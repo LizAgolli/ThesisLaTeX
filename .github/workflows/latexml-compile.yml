@@ -12,6 +12,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        
+      - name: Debug - List files
+        run: |
+          pwd
+          ls -la
+          ls -la *.tex || echo "No .tex files found in root"
+          find . -name "*.tex" -type f
 
       - name: Compile with LaTeXML
         run: |
